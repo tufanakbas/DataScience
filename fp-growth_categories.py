@@ -178,7 +178,7 @@ def apply_fp_growth(input_csv, output_csv):
 
 if __name__ == "__main__":
 
-    root_folder = "news"  # main folder path
+    root_folder = "./news"  # main folder path
 
     # creating output folder
     output_folder = create_output_folder()

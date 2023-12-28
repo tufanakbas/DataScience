@@ -124,7 +124,7 @@ def separate_words_with_comma(input_file, output_file, target_column):
 
 
 
-root_folder = "news"  # main folder path or name
+root_folder = "./news"  # main folder path or name
 csv_dosya = "input1.csv"
 
 # txt -> csv
