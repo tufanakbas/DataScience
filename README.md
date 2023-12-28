@@ -1,4 +1,4 @@
-# **CEN445 – Introduction to Data Visualization **
+# CEN445 – Introduction to Data Visualization 
 
 Asst. Prof. Dr. Mehmet SARIGÜL
 
@@ -15,6 +15,8 @@ Asst. Prof. Dr. Mehmet SARIGÜL
 - Install the necessary libraries
 - Run "fp-growth_all.py" first
 
+## To install the necessary libraries
+Run "pip install nltk mlxtend matplotlib seaborn" in terminal
 
 
 ## Method
