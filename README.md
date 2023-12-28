@@ -20,6 +20,7 @@ Asst. Prof. Dr. Mehmet SARIGÜL
 ## To install the necessary libraries
 Run "pip install nltk mlxtend matplotlib seaborn" in terminal
 
+## You can access detailed information about the study via "Data-Science-Report.pdf".
 
 ## Method
 On that project, the FP-Growth algorithm is used to find frequent patterns in the 42.000 news dataset. The working principle is realized by creating the FP-Tree, a tree-based structure. In the first step, frequently occurring items in the dataset are identified. Then, the FP-Tree containing these items is created. The FP-Tree represents the frequent patterns in the dataset. When building the FP-Tree, the algorithm compresses the data in such a way that the frequent items are included, and thus efficiently analyzes the data set. Due to this simple structure and efficiency, FP-Growth is used for finding association rules in large data sets.
