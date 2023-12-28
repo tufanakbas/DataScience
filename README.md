@@ -26,7 +26,7 @@ On that project, the FP-Growth algorithm is used to find frequent patterns in th
 
 - **fp-growth_categories**: It runs the algorithm on all news data, evaluates different categories within themselves and outputs the number of categories.
 
-
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ---
 
 
