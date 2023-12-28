@@ -24,7 +24,7 @@ def calculate_word_frequencies(input_csv, output_csv):
     print(f"Kelimelerin frekansları '{output_csv}' dosyasına yazıldı.")
 
 # csv names and paths
-input_csv_path = 'output_4.csv'
+input_csv_path = './output_4.csv'
 output_csv_path = 'word_frequencies1.csv'
 
 # run

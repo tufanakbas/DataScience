@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-csv_file = 'output_4.csv'
+csv_file = './output_4.csv'
 df = pd.read_csv(csv_file)
 
 # Select the Label
