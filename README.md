@@ -14,6 +14,8 @@ Asst. Prof. Dr. Mehmet SARIGÜL
 - Go into the repository
 - Install the necessary libraries
 - Run "fp-growth_all.py" first
+- Then run "fp-growth_categories.py" first
+- After that "frequency.py" and "graph.py" can be run.
 
 ## To install the necessary libraries
 Run "pip install nltk mlxtend matplotlib seaborn" in terminal
