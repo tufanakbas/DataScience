@@ -4,40 +4,37 @@ from mlxtend.frequent_patterns import fpgrowth
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# CSV dosyasını oku
-csv_file = 'output_4.csv'  # CSV dosyasının adını güncelleyin
+
+csv_file = 'output_4.csv'
 df = pd.read_csv(csv_file)
 
-# Her bir veri örneğini ayrı bir liste olarak al
+# Select the Label
 transactions = df["İçerik"].apply(lambda x: x.split(','))
 
-# TransactionEncoder kullanarak veriyi uygun formata dönüştür
+# Transaction Encoder formatting
 te = TransactionEncoder()
 te_ary = te.fit(transactions).transform(transactions)
 df_encoded = pd.DataFrame(te_ary, columns=te.columns_)
 
-
+#Fp-Growth algorithm
 frequent_itemsets = fpgrowth(df_encoded, min_support=0.2, use_colnames=True)
 sorted_frequent_itemsets = frequent_itemsets.sort_values(by='support', ascending=True)
-
-
-# Destek değerini belirli bir ondalık hassasiyetle göster
 sorted_frequent_itemsets['support'] = sorted_frequent_itemsets['support'].apply(lambda x: round(x, 6))
 
-# Çıktıyı düzenle ve yazdır
+# output
 output_df = sorted_frequent_itemsets['itemsets'].apply(lambda x: ', '.join(list(x)))
 output_df = pd.DataFrame({'Support': sorted_frequent_itemsets['support'],'Frequent Patterns': output_df})
 print(output_df)
 
-# Frozenset'i düz metin listesine dönüştür
+# remove frozensets
 sorted_frequent_itemsets['itemsets'] = sorted_frequent_itemsets['itemsets'].apply(lambda x: ', '.join(list(x)))
 
 
-# Grafik için en çok kullanılan kelimeleri ve kelime çiftlerini seç
-top_k_items = 21  # İlk 10 öğeyi seç
+# Graph detail
+top_k_items = 21  # item count
 top_k_frequent_itemsets = sorted_frequent_itemsets.tail(top_k_items)
 
-# Grafik oluştur
+# Create graph
 plt.figure(figsize=(12, 8))
 sns.barplot(x='support', y='itemsets', data=top_k_frequent_itemsets, palette='viridis')
 plt.xlabel('Support')

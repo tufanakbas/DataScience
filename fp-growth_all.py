@@ -123,14 +123,14 @@ def separate_words_with_comma(input_file, output_file, target_column):
     return output_file
 
 
-# Ana klasör yolu ve CSV dosya adını belirt
-root_folder = "news"  # Kullanılacak ana klasör yolunu güncelleyin
-csv_dosya = "input1.csv"         # Oluşturulan CSV dosyasının adını güncelleyin
 
-# Fonksiyonu çağır
+root_folder = "news"  # main folder path or name
+csv_dosya = "input1.csv"
+
+# txt -> csv
 txt_to_csv(root_folder, csv_dosya)
 
-# Ana işlem
+# 4 functions to preprocess the data
 input_file = 'input1.csv'
 
 output_file_1 = remove_single_letter_words(input_file, 'output_1.csv', 'İçerik')
@@ -138,36 +138,30 @@ output_file_2 = remove_two_letter_words(output_file_1, 'output_2.csv', 'İçerik
 output_file_3 = remove_specific_words(output_file_2, 'output_3.csv', 'İçerik')
 output_file_4 = separate_words_with_comma(output_file_3, 'output_4.csv', 'İçerik')
 
-# CSV dosyasını oku
-csv_file = 'output_4.csv'  # CSV dosyasının adını güncelleyin
+#do not change (output_4 is an output created by other func)
+csv_file = 'output_4.csv'
 df = pd.read_csv(csv_file)
 
-# Her bir veri örneğini ayrı bir liste olarak al
 transactions = df["İçerik"].apply(lambda x: x.split(','))
 
-# TransactionEncoder kullanarak veriyi uygun formata dönüştür
+# Transaction Encoder formatting
 te = TransactionEncoder()
 te_ary = te.fit(transactions).transform(transactions)
 df_encoded = pd.DataFrame(te_ary, columns=te.columns_)
 
-# Frequent Pattern Growth (FP-Growth) algoritmasıyla sık kalıpları bul
+# Frequent Pattern Growth
 frequent_itemsets = fpgrowth(df_encoded, min_support=0.2, use_colnames=True)
 sorted_frequent_itemsets = frequent_itemsets.sort_values(by='support', ascending=False)
 
-# Destek değerini belirli bir ondalık hassasiyetle göster
 sorted_frequent_itemsets['support'] = sorted_frequent_itemsets['support'].apply(lambda x: round(x, 6))
 
-# Frozenset'i düz metin listesine dönüştür
 sorted_frequent_itemsets['itemsets'] = sorted_frequent_itemsets['itemsets'].apply(lambda x: ', '.join(list(x)))
 
-# Çıktı dosyasının adını belirle
+# output file name
 output_csv = "fp-growth_output.csv"
 
-# Frequent Pattern Growth (FP-Growth) algoritmasıyla elde edilen sonuçları CSV'ye yaz
+# write to csv
 sorted_frequent_itemsets.to_csv(output_csv, index=False)
 
-# Başarıyla tamamlandı mesajı ver
-print("Frequent Patterns başarıyla CSV dosyasına yazıldı.")
-
-# Sonuçları ekrana yazdır
+# print outputs
 print(sorted_frequent_itemsets)

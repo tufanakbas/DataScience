@@ -2,30 +2,30 @@ import pandas as pd
 from collections import Counter
 
 def calculate_word_frequencies(input_csv, output_csv):
-    # CSV dosyasını oku
+
     df = pd.read_csv(input_csv)
 
-    # 'İçerik' sütunundaki tüm kelimeleri birleştir ve virgülle ayır
+    # select label
     all_text = ','.join(df['İçerik'].astype(str))
     words = all_text.split(',')
 
-    # Kelime frekanslarını hesapla
+    # calculate frequency
     word_frequencies = Counter(words)
 
-    # Frekansları içeren bir DataFrame oluştur
-    frequency_df = pd.DataFrame(list(word_frequencies.items()), columns=['Kelime', 'Frekans'])
+    # create DataFrame
+    frequency_df = pd.DataFrame(list(word_frequencies.items()), columns=['Word', 'Frequency'])
 
-    # Frekans sütununa göre büyükten küçüğe sırala
-    frequency_df = frequency_df.sort_values(by='Frekans', ascending=False)
+    # sort
+    frequency_df = frequency_df.sort_values(by='Frequency', ascending=False)
 
-    # CSV dosyasına yaz
+    # write to csv
     frequency_df.to_csv(output_csv, index=False)
 
     print(f"Kelimelerin frekansları '{output_csv}' dosyasına yazıldı.")
 
-# Kullanılacak CSV dosyalarının adlarını ve yollarını güncelleyin
+# csv names and paths
 input_csv_path = 'output_4.csv'
 output_csv_path = 'word_frequencies1.csv'
 
-# Fonksiyonu çağır
+# run
 calculate_word_frequencies(input_csv_path, output_csv_path)
